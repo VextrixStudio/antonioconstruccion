@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -15,8 +15,139 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Antonio Enriquez Construction | Premium Building & Remodeling",
-  description: "High-end residential and commercial construction since 2016. Serving Perris and all of California."
+  metadataBase: new URL("https://antonioenriquezconstruction.com"),
+  title: {
+    default: "Antonio Enriquez Construction | General Contractor in Perris, CA",
+    template: "%s | Antonio Enriquez Construction"
+  },
+  description:
+    "Licensed & insured general contractor in Perris, California. Full-service residential and commercial construction, remodeling, painting, metal works, concrete and more. 10+ years of craftsmanship across California.",
+  keywords: [
+    "construction Perris CA",
+    "general contractor Perris",
+    "general contractor Riverside County",
+    "construction company California",
+    "remodeling Perris CA",
+    "commercial construction California",
+    "residential construction",
+    "home remodeling Perris",
+    "painting contractor California",
+    "metal works California",
+    "concrete contractor",
+    "drywall framing",
+    "tenant improvements",
+    "Antonio Enriquez Construction"
+  ],
+  authors: [{ name: "Antonio Enriquez Construction" }],
+  creator: "Antonio Enriquez Construction",
+  publisher: "Antonio Enriquez Construction",
+  applicationName: "Antonio Enriquez Construction",
+  category: "Construction",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false
+  },
+  alternates: {
+    canonical: "/"
+  },
+  openGraph: {
+    title: "Antonio Enriquez Construction | Building Your Vision",
+    description:
+      "Real craftsmanship by humans, for humans. Full-service residential and commercial construction in California. Licensed, insured and trusted since 2016.",
+    url: "https://antonioenriquezconstruction.com",
+    siteName: "Antonio Enriquez Construction",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.jpg", // Crea esta imagen 1200x630px en /public
+        width: 1200,
+        height: 630,
+        alt: "Antonio Enriquez Construction - Premium Building & Remodeling"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Antonio Enriquez Construction",
+    description:
+      "Licensed general contractor in California. 10+ years building dreams with precision and care.",
+    images: ["/og-image.jpg"]
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1
+    }
+  },
+  verification: {
+    google: "lyOH6AFR5ZzLVDnFVTLVw9HmpkEuM_7wFU4RsKzWAl0"
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png"
+  }
+};
+
+export const viewport: Viewport = {
+  themeColor: "#050505",
+  colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5
+};
+
+// JSON-LD para Google (Local Business Schema)
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "GeneralContractor",
+  name: "Antonio Enriquez Construction",
+  image: "https://antonioenriquezconstruction.com/og-image.jpg",
+  "@id": "https://antonioenriquezconstruction.com",
+  url: "https://antonioenriquezconstruction.com",
+  telephone: "+1-323-740-8161",
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "370 Paul Ct",
+    addressLocality: "Perris",
+    addressRegion: "CA",
+    postalCode: "92570",
+    addressCountry: "US"
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 33.78008,
+    longitude: -117.24975
+  },
+  areaServed: [
+    { "@type": "State", name: "California" },
+    { "@type": "City", name: "Perris" },
+    { "@type": "City", name: "Riverside" },
+    { "@type": "City", name: "Los Angeles" },
+    { "@type": "City", name: "San Bernardino" }
+  ],
+  sameAs: [
+    "https://www.instagram.com/antonio.construcsion",
+    "https://www.youtube.com/@antocontruction"
+  ],
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      opens: "07:00",
+      closes: "18:00"
+    }
+  ],
+  foundingDate: "2016",
+  description:
+    "Licensed and insured general contractor offering residential and commercial construction, remodeling, painting, metal works, concrete and more in Perris and across California."
 };
 
 export default function RootLayout({
@@ -27,8 +158,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth dark" style={{ colorScheme: "dark" }}>
       <head>
-        <meta name="color-scheme" content="dark only" />
-        <meta name="theme-color" content="#050505" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-[#050505] text-zinc-100 antialiased selection:bg-amber-500/30 selection:text-white`}
@@ -37,9 +170,7 @@ export default function RootLayout({
 
         <Nav />
 
-        <main className="relative flex flex-col pt-20 lg:pt-28">
-          {children}
-        </main>
+        <main className="relative flex flex-col pt-20 lg:pt-28">{children}</main>
 
         <SiteFooter />
       </body>
@@ -63,7 +194,6 @@ function SiteFooter() {
   return (
     <footer className="mt-20 border-t border-white/10 bg-zinc-950/50 py-16 px-6 backdrop-blur-md">
       <div className="mx-auto max-w-7xl grid md:grid-cols-3 gap-12 items-start">
-
         {/* brand */}
         <div className="space-y-4">
           <h3 className="text-xl font-black tracking-tighter uppercase text-white">
