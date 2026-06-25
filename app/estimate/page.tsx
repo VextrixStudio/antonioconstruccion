@@ -9,7 +9,8 @@ import {
     Trees, Layers, DoorOpen, Warehouse, PenTool,
     Hash, Triangle, Sparkles, Wrench, Ruler,
     Fence, DoorClosed, Square, Grid3x3, Box, Pipette,
-    PaintRoller, Construction as ConstructionIcon
+    PaintRoller, Construction as ConstructionIcon, Plus,
+    Mail, Phone
 } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -18,19 +19,22 @@ function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
-// servicios principales (seleccion multiple)
-const SERVICES = [
+// servicios principales (los mas comunes primero)
+const MAIN_SERVICES = [
     { id: "Construction", icon: <Construction size={32} /> },
     { id: "Remodeling", icon: <Hammer size={32} /> },
     { id: "Painting", icon: <Paintbrush size={32} /> },
-    { id: "Metal Works", icon: <Layers size={32} /> },
+    { id: "Metal Works", icon: <Layers size={32} /> }
+];
+
+// servicios extra (se muestran al hacer click en "more")
+const EXTRA_SERVICES = [
     { id: "Concrete", icon: <Briefcase size={32} /> },
     { id: "Drywall & Framing", icon: <Ruler size={32} /> },
     { id: "Repairs", icon: <Wrench size={32} /> },
     { id: "Interior Design", icon: <Sofa size={32} /> }
 ];
 
-// areas asociadas a cada servicio (residencial y comercial)
 type AreaItem = { id: string; icon: React.ReactNode };
 
 const SERVICE_AREAS: Record<string, { Residential: AreaItem[]; Commercial: AreaItem[] }> = {
@@ -169,10 +173,16 @@ const TIMELINES = [
     { id: "Just Planning", phrase: "soon — we're still in the planning phase" }
 ];
 
+// datos de contacto
+const CONTACT_EMAIL = "contact@antonioenriquezconstruction.com";
+const CONTACT_PHONE = "+13237408161";
+
 export default function ConstructionEstimate() {
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(0); // empieza en 0 ahora (eleccion de metodo)
+    const [showMoreServices, setShowMoreServices] = useState(false);
     const [projectId] = useState(() => Math.floor(Math.random() * 10000));
     const [data, setData] = useState({
+        contactMethod: "" as "sms" | "email" | "",
         firstName: "",
         lastName: "",
         services: [] as string[],
@@ -190,47 +200,61 @@ export default function ConstructionEstimate() {
     const fullAddress = [data.street, data.city, data.state, data.zip].filter(Boolean).join(", ");
     const timelinePhrase = TIMELINES.find(t => t.id === data.timeline)?.phrase || "as soon as possible";
 
-    // texto natural de servicios
     const servicesText = data.services.length === 0
         ? "construction"
         : data.services.length === 1
             ? data.services[0].toLowerCase()
             : data.services.slice(0, -1).map(s => s.toLowerCase()).join(", ") + " and " + data.services[data.services.length - 1].toLowerCase();
 
-    // texto natural de areas
     const areasText = data.areas.length === 0
         ? "space"
         : data.areas.length === 1
             ? data.areas[0].toLowerCase()
             : data.areas.slice(0, -1).map(a => a.toLowerCase()).join(", ") + " and " + data.areas[data.areas.length - 1].toLowerCase();
 
-    const defaultMessage =
+    // mensaje para sms (corto y directo)
+    const smsMessage =
         `Hi Antonio, my name is ${fullName || "[Your Name]"}. ` +
-        `I'd like to request a quote for a ${data.propertyType.toLowerCase()} project that includes ${servicesText} ` +
+        `I'd like a quote for a ${data.propertyType.toLowerCase()} project that includes ${servicesText} ` +
         `on my ${areasText}, located at ${fullAddress || "[address]"}. ` +
-        `I'm hoping to get started ${timelinePhrase}. ` +
-        `Please get back to me when you have a chance. Thank you!`;
+        `I'm hoping to start ${timelinePhrase}. Thank you!`;
 
+    // mensaje para email (mas profesional con saludo y firma)
+    const emailMessage =
+        `Hello Antonio,\n\n` +
+        `My name is ${fullName || "[Your Name]"} and I'd like to request a quote for a ${data.propertyType.toLowerCase()} project.\n\n` +
+        `Services needed: ${data.services.join(", ") || "[services]"}\n` +
+        `Target areas: ${data.areas.join(", ") || "[areas]"}\n` +
+        `Project location: ${fullAddress || "[address]"}\n` +
+        `Timeline: I'm hoping to start ${timelinePhrase}.\n\n` +
+        `Please get back to me at your earliest convenience.\n\n` +
+        `Thank you,\n${fullName || "[Your Name]"}`;
+
+    const emailSubject = `Quote Request — ${data.propertyType} Project — ${fullName || "New Client"}`;
+
+    const defaultMessage = data.contactMethod === "email" ? emailMessage : smsMessage;
     const finalMessage = data.userEditedMessage || defaultMessage;
 
-    const phoneNumber = "+13237408161";
+    // generar link segun metodo elegido
     const encodedBody = encodeURIComponent(finalMessage);
-    const smsLink = `sms:${phoneNumber}?&body=${encodedBody}`;
+    const encodedSubject = encodeURIComponent(emailSubject);
+
+    const submitLink = data.contactMethod === "email"
+        ? `mailto:${CONTACT_EMAIL}?subject=${encodedSubject}&body=${encodedBody}`
+        : `sms:${CONTACT_PHONE}?&body=${encodedBody}`;
 
     const handleSubmit = () => {
         if (typeof window !== "undefined") {
-            window.location.href = smsLink;
+            window.location.href = submitLink;
         }
     };
 
-    // toggle servicio
     const toggleService = (id: string) => {
         setData(prev => ({
             ...prev,
             services: prev.services.includes(id)
                 ? prev.services.filter(s => s !== id)
                 : [...prev.services, id],
-            // limpiar areas si cambia servicios
             areas: prev.areas.filter(a => {
                 const newServices = prev.services.includes(id)
                     ? prev.services.filter(s => s !== id)
@@ -242,7 +266,6 @@ export default function ConstructionEstimate() {
         }));
     };
 
-    // toggle area
     const toggleArea = (id: string) => {
         setData(prev => ({
             ...prev,
@@ -252,7 +275,6 @@ export default function ConstructionEstimate() {
         }));
     };
 
-    // combinar areas unicas de todos los servicios elegidos
     const combinedAreas: AreaItem[] = (() => {
         const seen = new Set<string>();
         const result: AreaItem[] = [];
@@ -268,21 +290,24 @@ export default function ConstructionEstimate() {
         return result;
     })();
 
+    // lista de servicios visible (4 principales + extras si esta expandido)
+    const visibleServices = showMoreServices ? [...MAIN_SERVICES, ...EXTRA_SERVICES] : MAIN_SERVICES;
+
     return (
         <section className="relative z-10 flex flex-col items-center justify-start min-h-[85vh] px-6 py-12 select-none">
             <div className="w-full max-w-5xl flex flex-col items-center relative z-20">
 
-                {/* progress bar */}
+                {/* progress bar - ahora con 6 pasos (0 + 5) */}
                 <div className="relative flex items-center justify-between w-full max-w-md mb-20 mx-auto z-30">
-                    {[1, 2, 3, 4, 5].map((i) => (
+                    {[0, 1, 2, 3, 4, 5].map((i) => (
                         <div key={i} className="z-10 flex items-center justify-center">
                             <div className={cn(
-                                "h-11 w-11 rounded-2xl flex items-center justify-center border transition-all duration-500 text-[11px] font-black",
+                                "h-10 w-10 rounded-2xl flex items-center justify-center border transition-all duration-500 text-[10px] font-black",
                                 step >= i
                                     ? "border-amber-500 bg-amber-500 text-black shadow-[0_0_20px_rgba(245,158,11,0.4)] scale-110"
                                     : "border-white/15 bg-white/5 text-zinc-500"
                             )}>
-                                {step > i ? <Check size={16} strokeWidth={4} /> : i}
+                                {step > i ? <Check size={14} strokeWidth={4} /> : i === 0 ? "✦" : i}
                             </div>
                         </div>
                     ))}
@@ -291,16 +316,85 @@ export default function ConstructionEstimate() {
 
                 <div className="w-full flex flex-col items-center relative z-20">
 
-                    {/* paso 1 - servicios (multi) */}
-                    {step === 1 && (
-                        <div className="w-full space-y-12 animate-in fade-in zoom-in duration-700 flex flex-col items-center text-center">
+                    {/* PASO 0 - METODO DE CONTACTO */}
+                    {step === 0 && (
+                        <div className="w-full space-y-12 animate-in fade-in zoom-in duration-700 flex flex-col items-center text-center max-w-3xl">
                             <div className="space-y-4">
                                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-500/40 bg-amber-500/10">
                                     <Sparkles size={11} className="text-amber-400" />
                                     <span className="text-[10px] font-black uppercase tracking-[0.4em] text-amber-400">
-                                        Step 01
+                                        Get Started
                                     </span>
                                 </div>
+                                <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-none italic text-white">
+                                    Contact.
+                                </h1>
+                                <p className="text-[10px] font-bold text-zinc-300 uppercase tracking-widest pt-2">
+                                    How would you like to send your quote request?
+                                </p>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                                {/* sms */}
+                                <button
+                                    type="button"
+                                    onClick={() => { setData({ ...data, contactMethod: "sms" }); setStep(1); }}
+                                    className="group relative p-10 rounded-[2.5rem] border border-white/10 bg-white/5 hover:bg-amber-500/10 hover:border-amber-500/50 transition-all duration-500 text-left z-30 block w-full overflow-hidden"
+                                >
+                                    <div className="absolute -top-12 -right-12 w-32 h-32 bg-amber-500/0 group-hover:bg-amber-500/15 blur-3xl rounded-full transition-all duration-700" />
+                                    <div className="relative">
+                                        <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-3xl border bg-amber-500/10 border-amber-500/20 text-amber-400 group-hover:bg-amber-500 group-hover:text-black group-hover:scale-110 transition-all pointer-events-none">
+                                            <Phone size={32} />
+                                        </div>
+                                        <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter italic leading-none text-white mb-3">
+                                            Text Message
+                                        </h3>
+                                        <p className="text-zinc-300 text-sm font-light leading-relaxed">
+                                            Quick and direct — opens your SMS app with the message ready to send.
+                                        </p>
+                                        <p className="text-amber-400 text-xs font-bold uppercase tracking-widest mt-4">
+                                            (323) 740-8161
+                                        </p>
+                                    </div>
+                                </button>
+
+                                {/* email */}
+                                <button
+                                    type="button"
+                                    onClick={() => { setData({ ...data, contactMethod: "email" }); setStep(1); }}
+                                    className="group relative p-10 rounded-[2.5rem] border border-white/10 bg-white/5 hover:bg-amber-500/10 hover:border-amber-500/50 transition-all duration-500 text-left z-30 block w-full overflow-hidden"
+                                >
+                                    <div className="absolute -top-12 -right-12 w-32 h-32 bg-amber-500/0 group-hover:bg-amber-500/15 blur-3xl rounded-full transition-all duration-700" />
+                                    <div className="relative">
+                                        <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-3xl border bg-amber-500/10 border-amber-500/20 text-amber-400 group-hover:bg-amber-500 group-hover:text-black group-hover:scale-110 transition-all pointer-events-none">
+                                            <Mail size={32} />
+                                        </div>
+                                        <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter italic leading-none text-white mb-3">
+                                            Email
+                                        </h3>
+                                        <p className="text-zinc-300 text-sm font-light leading-relaxed">
+                                            Formal request — opens your mail app with the full details organized.
+                                        </p>
+                                        <p className="text-amber-400 text-[10px] font-bold lowercase tracking-wider mt-4 break-all">
+                                            contact@antonioenriquezconstruction.com
+                                        </p>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* PASO 1 - SERVICIOS */}
+                    {step === 1 && (
+                        <div className="w-full space-y-12 animate-in fade-in zoom-in duration-700 flex flex-col items-center text-center">
+                            <div className="space-y-4">
+                                <button
+                                    type="button"
+                                    onClick={() => setStep(0)}
+                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 text-[10px] font-black text-zinc-300 hover:text-white hover:bg-white/10 uppercase tracking-[0.3em] mx-auto transition-all relative z-30"
+                                >
+                                    <ArrowLeft size={12} /> Back
+                                </button>
                                 <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-none italic text-white">
                                     Services.
                                 </h1>
@@ -318,7 +412,7 @@ export default function ConstructionEstimate() {
                             </div>
 
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
-                                {SERVICES.map((opt) => {
+                                {visibleServices.map((opt) => {
                                     const isSelected = data.services.includes(opt.id);
                                     return (
                                         <button
@@ -361,6 +455,18 @@ export default function ConstructionEstimate() {
                                 })}
                             </div>
 
+                            {/* boton para mostrar mas servicios */}
+                            {!showMoreServices && (
+                                <button
+                                    type="button"
+                                    onClick={() => setShowMoreServices(true)}
+                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 bg-white/5 text-[10px] font-black text-zinc-300 hover:text-white hover:bg-amber-500/10 hover:border-amber-500/40 uppercase tracking-[0.3em] transition-all relative z-30"
+                                >
+                                    <Plus size={14} />
+                                    More Services
+                                </button>
+                            )}
+
                             <button
                                 disabled={data.services.length === 0}
                                 type="button"
@@ -372,7 +478,7 @@ export default function ConstructionEstimate() {
                         </div>
                     )}
 
-                    {/* paso 2 - cliente */}
+                    {/* PASO 2 - CLIENTE */}
                     {step === 2 && (
                         <div className="w-full space-y-12 animate-in fade-in slide-in-from-right-10 duration-700 max-w-2xl flex flex-col items-center text-center">
                             <div className="space-y-4">
@@ -447,7 +553,7 @@ export default function ConstructionEstimate() {
                         </div>
                     )}
 
-                    {/* paso 3 - areas dinamicas (multi) */}
+                    {/* PASO 3 - AREAS */}
                     {step === 3 && (
                         <div className="w-full space-y-12 animate-in fade-in slide-in-from-right-10 duration-700 flex flex-col items-center text-center">
                             <div className="space-y-4">
@@ -465,7 +571,6 @@ export default function ConstructionEstimate() {
                                     Based on your selected services — pick one or more areas
                                 </p>
 
-                                {/* mostrar servicios elegidos como referencia */}
                                 <div className="flex flex-wrap justify-center gap-2 pt-2 max-w-2xl mx-auto">
                                     {data.services.map(s => (
                                         <span
@@ -533,7 +638,7 @@ export default function ConstructionEstimate() {
                         </div>
                     )}
 
-                    {/* paso 4 - ubicacion */}
+                    {/* PASO 4 - UBICACION */}
                     {step === 4 && (
                         <div className="w-full space-y-12 animate-in fade-in slide-in-from-right-10 duration-700 max-w-2xl flex flex-col items-center text-center">
                             <div className="space-y-4">
@@ -639,7 +744,7 @@ export default function ConstructionEstimate() {
                         </div>
                     )}
 
-                    {/* paso 5 - revision */}
+                    {/* PASO 5 - REVISION */}
                     {step === 5 && (
                         <div className="w-full max-w-5xl animate-in zoom-in fade-in duration-700 relative z-30">
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -676,6 +781,20 @@ export default function ConstructionEstimate() {
                                                 <p className="text-xl font-black italic uppercase leading-none text-amber-400">
                                                     {data.propertyType}
                                                 </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="pt-6 border-t border-white/10">
+                                            <p className="text-[9px] text-zinc-400 uppercase font-black tracking-[0.3em] mb-2">
+                                                Sending via
+                                            </p>
+                                            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-amber-500/40 bg-amber-500/10">
+                                                {data.contactMethod === "email"
+                                                    ? <Mail size={12} className="text-amber-400" />
+                                                    : <Phone size={12} className="text-amber-400" />}
+                                                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-300">
+                                                    {data.contactMethod === "email" ? "Email" : "Text Message"}
+                                                </span>
                                             </div>
                                         </div>
 
@@ -748,7 +867,7 @@ export default function ConstructionEstimate() {
 
                                         <button
                                             type="button"
-                                            onClick={() => setStep(1)}
+                                            onClick={() => { setStep(0); setData({ ...data, userEditedMessage: "" }); }}
                                             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 text-[9px] font-black uppercase tracking-[0.3em] text-zinc-300 hover:text-white hover:bg-white/10 transition-all relative z-30"
                                         >
                                             Start New Draft
@@ -759,9 +878,11 @@ export default function ConstructionEstimate() {
                                 <div className="flex flex-col gap-6 w-full relative z-30">
                                     <div className="flex items-center justify-between px-2">
                                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5">
-                                            <MessageSquare size={12} className="text-amber-400" />
+                                            {data.contactMethod === "email"
+                                                ? <Mail size={12} className="text-amber-400" />
+                                                : <MessageSquare size={12} className="text-amber-400" />}
                                             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-200">
-                                                Communication Preview
+                                                {data.contactMethod === "email" ? "Email Preview" : "Message Preview"}
                                             </span>
                                         </div>
                                     </div>
@@ -773,14 +894,14 @@ export default function ConstructionEstimate() {
                                     />
 
                                     <a
-                                        href={smsLink}
+                                        href={submitLink}
                                         onClick={(e) => {
                                             e.preventDefault();
                                             handleSubmit();
                                         }}
                                         className="flex items-center justify-center gap-4 bg-amber-500 text-black py-10 rounded-[2.5rem] font-black uppercase tracking-[0.4em] hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(245,158,11,0.4)] transition-all active:scale-95 group w-full relative z-30 cursor-pointer no-underline text-sm"
                                     >
-                                        Submit to Antonio
+                                        {data.contactMethod === "email" ? "Send Email" : "Send Message"}
                                         <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                     </a>
                                 </div>

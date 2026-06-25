@@ -79,7 +79,7 @@ export default function ContactPage() {
 
                         {/* email card */}
                         <a
-                            href="mailto:josezherrero@gmail.com"
+                            href="mailto:contact@antonioenriquezconstruction.com"
                             className="group relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 p-10 md:p-16 transition-all hover:border-white/30 hover:bg-white/10"
                         >
                             <div className="absolute -top-16 -right-16 w-64 h-64 bg-white/0 group-hover:bg-white/5 blur-3xl rounded-full transition-all duration-700" />
@@ -107,12 +107,46 @@ export default function ContactPage() {
                                         Us
                                     </p>
                                     <p className="mt-6 text-zinc-200 text-sm font-bold lowercase tracking-wider">
-                                        josezherrero@gmail.com
+                                        contact@antonioenriquezconstruction.com
                                     </p>
                                 </div>
                             </div>
                         </a>
+                        {/* Email caard - studio */}
+                        <a
+                            href="mailto: vextrixstudio@outlook.com"
+                            className="group relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 p-10 md:p-16 transition-all hover:border-white/30 hover:bg-white/10"
+                        >
+                            <div className="absolute -top-16 -right-16 w-64 h-64 bg-white/0 group-hover:bg-white/5 blur-3xl rounded-full transition-all duration-700" />
 
+                            <div className="absolute -right-10 -top-10 text-white/5 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-12">
+                                <Mail size={300} />
+                            </div>
+
+                            <div className="relative z-10 flex flex-col h-full justify-between gap-20">
+                                <div className="flex justify-between items-start">
+                                    <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 border border-white/20 text-zinc-200 group-hover:bg-white group-hover:text-black group-hover:scale-110 transition-all duration-500">
+                                        <Mail size={20} />
+                                    </div>
+                                    <ArrowUpRight className="text-zinc-400 transition-all group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1" />
+                                </div>
+
+                                <div>
+                                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/20 bg-white/10 mb-5">
+                                        <span className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-200">
+                                            Official Inquiry
+                                        </span>
+                                    </div>
+                                    <p className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white leading-none">
+                                        Email to  <br />
+                                        STUDIO
+                                    </p>
+                                    <p className="mt-6 text-zinc-200 text-sm font-bold lowercase tracking-wider">
+                                         vextrixstudio@outlook.com
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </section>
