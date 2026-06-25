@@ -13,7 +13,7 @@ const SOCIALS = [
     {
         name: "Instagram",
         handle: "@antonioconstrucsion",
-        url: "https://www.instagram.com/",
+        url: "https://www.instagram.com/antonioenriquezconstruction/",
         icon: <InstagramIcon />,
         description: "Daily photos, stories and updates from active job sites.",
         color: "from-pink-500/20 to-amber-500/10"
@@ -21,7 +21,7 @@ const SOCIALS = [
     {
         name: "Facebook",
         handle: "Antonio Enriquez Construction",
-        url: "https://www.facebook.com/",
+        url: "https://www.facebook.com/profile.php?id=61591485236918",
         icon: <FacebookIcon />,
         description: "Community updates, reviews and project announcements.",
         color: "from-blue-500/20 to-amber-500/10"
@@ -29,7 +29,7 @@ const SOCIALS = [
     {
         name: "TikTok",
         handle: "@antonioconstruction",
-        url: "https://www.tiktok.com/",
+        url: "https://www.tiktok.com/@antonio.eq.constr",
         icon: <TikTokIcon />,
         description: "Quick clips, tips and the most viral builds we've done.",
         color: "from-purple-500/20 to-amber-500/10"

@@ -6,7 +6,7 @@ export default function Home() {
     <>
       <section className="relative flex min-h-[85vh] flex-col justify-center px-6">
         <div className="relative z-10 mx-auto max-w-7xl w-full">
-          
+
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/40 bg-amber-500/10 mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
@@ -22,7 +22,7 @@ export default function Home() {
                 <span className="text-zinc-300 hover:text-white transition-colors cursor-default">Building</span>
                 <span className="text-amber-500">.</span>
               </h1>
-              
+
               <p className="max-w-xl text-zinc-200 text-lg md:text-xl font-light leading-relaxed border-l-2 border-amber-500/50 pl-6">
                 Real craftsmanship by humans, for humans. Full-service residential and commercial construction, remodeling, painting, metal works and more — precision in every square foot.
               </p>
@@ -32,17 +32,18 @@ export default function Home() {
                   Request Free Quote
                   <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </Link>
-                
+
                 <a href="tel:+13237408161" className="flex items-center gap-4 border border-white/20 bg-white/10 px-8 py-6 text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-all hover:bg-white/20">
                   <Phone size={16} className="text-amber-400 animate-pulse" />
                   Direct Line
                 </a>
 
                 <div className="flex items-center gap-4 pl-2">
-                  <a href="https://www.instagram.com/antonio.construcsion" target="_blank" rel="noopener noreferrer" className="p-4 border border-white/20 bg-white/10 text-zinc-200 hover:text-amber-400 hover:border-amber-500/50 transition-all rounded-none" aria-label="Instagram">
+                  <a href="https://www.instagram.com/antonioenriquezconstruction/
+" target="_blank" rel="noopener noreferrer" className="p-4 border border-white/20 bg-white/10 text-zinc-200 hover:text-amber-400 hover:border-amber-500/50 transition-all rounded-none" aria-label="Instagram">
                     <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                   </a>
-                  <a href="https://www.youtube.com/@antocontruction" target="_blank" rel="noopener noreferrer" className="p-4 border border-white/20 bg-white/10 text-zinc-200 hover:text-amber-400 hover:border-amber-500/50 transition-all rounded-none" aria-label="YouTube">
+                  <a href="https://www.youtube.com/@antonioenriquezconstructionon" target="_blank" rel="noopener noreferrer" className="p-4 border border-white/20 bg-white/10 text-zinc-200 hover:text-amber-400 hover:border-amber-500/50 transition-all rounded-none" aria-label="YouTube">
                     <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
                   </a>
                 </div>
@@ -125,12 +126,12 @@ export default function Home() {
       </section>
 
       <section className="relative py-32 md:py-48 px-6 overflow-hidden border-t border-white/10 bg-[#050505]">
-        
+
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-200 h-75 bg-amber-500/10 blur-[120px] rounded-full pointer-events-none" />
-        
+
         <div className="relative z-10 mx-auto max-w-6xl">
           <div className="relative overflow-hidden rounded-[2.5rem] border border-white/15 bg-linear-to-b from-white/5 to-transparent p-12 md:p-24 text-center backdrop-blur-md transition-all duration-700 hover:border-white/30">
-            
+
             <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(#fff_1px,transparent_1px)] bg-size-[24px_24px]" />
 
             <div className="relative z-20 flex flex-col items-center">
@@ -157,14 +158,14 @@ export default function Home() {
                 </Link>
 
                 <div className="flex items-center gap-6">
-                  <a 
-                    href="tel:+13237408161" 
+                  <a
+                    href="tel:+13237408161"
                     className="group flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-200 transition-colors hover:text-white"
                   >
                     <Phone size={14} className="text-amber-400 group-hover:scale-110 transition-transform" />
                     Consultation
                   </a>
-                  
+
                   <a href="https://www.instagram.com/antonio.construcsion" target="_blank" rel="noopener noreferrer" className="text-zinc-200 hover:text-white transition-colors" aria-label="Instagram">
                     <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                   </a>

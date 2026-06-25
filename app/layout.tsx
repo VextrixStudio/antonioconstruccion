@@ -134,8 +134,10 @@ const jsonLd = {
     { "@type": "City", name: "San Bernardino" }
   ],
   sameAs: [
-    "https://www.instagram.com/antonio.construcsion",
-    "https://www.youtube.com/@antocontruction"
+    "https://www.instagram.com/antonioenriquezconstruction/",
+    "https://www.youtube.com/@antonioenriquezconstructionon",
+    "https://www.facebook.com/profile.php?id=61591485236918",
+    "https://www.tiktok.com/@antonio.eq.constr"
   ],
   openingHoursSpecification: [
     {
