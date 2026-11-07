@@ -1,10 +1,17 @@
 // app/terms/page.tsx
 import Link from "next/link";
 import { FileText, ScrollText, AlertCircle, Scale, Briefcase, Mail, ArrowUpRight, Sparkles } from "lucide-react";
+import { socialMetadata } from "../social-metadata";
+
+export const metadata = socialMetadata(
+  "/terms",
+  "Website terms of use",
+  "Review the terms that apply when using the Antonio Enriquez Construction website and its online information."
+);
 
 export default function TermsPage() {
     return (
-        <div className="flex flex-col">
+        <div className="page-route page-terms flex flex-col">
 
             {/* hero */}
             <section className="relative px-6 py-24 md:py-32 overflow-hidden">

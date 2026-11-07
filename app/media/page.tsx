@@ -1,5 +1,12 @@
 // app/media/page.tsx
 import { ArrowUpRight, Sparkles } from "lucide-react";
+import { socialMetadata } from "../social-metadata";
+
+export const metadata = socialMetadata(
+    "/media",
+    "Follow Antonio Enriquez Construction",
+    "Find project photos, videos, and company updates from Antonio Enriquez Construction on Instagram, Facebook, YouTube, and TikTok."
+);
 
 const SOCIALS = [
     {
@@ -7,7 +14,7 @@ const SOCIALS = [
         handle: "@antonioenriquezconstructionon",
         url: "https://www.youtube.com/@antonioenriquezconstructionon",
         icon: <YouTubeIcon />,
-        description: "Watch our latest projects, behind the scenes and time-lapse builds.",
+        description: "Project videos and updates from Antonio Enriquez Construction.",
         color: "from-red-500/20 to-amber-500/10"
     },
     {
@@ -15,7 +22,7 @@ const SOCIALS = [
         handle: "@antonioconstrucsion",
         url: "https://www.instagram.com/antonioenriquezconstruction/",
         icon: <InstagramIcon />,
-        description: "Daily photos, stories and updates from active job sites.",
+        description: "Photos and updates from projects and the work behind them.",
         color: "from-pink-500/20 to-amber-500/10"
     },
     {
@@ -23,7 +30,7 @@ const SOCIALS = [
         handle: "Antonio Enriquez Construction",
         url: "https://www.facebook.com/profile.php?id=61591485236918",
         icon: <FacebookIcon />,
-        description: "Community updates, reviews and project announcements.",
+        description: "Company updates and project announcements.",
         color: "from-blue-500/20 to-amber-500/10"
     },
     {
@@ -31,7 +38,7 @@ const SOCIALS = [
         handle: "@antonioconstruction",
         url: "https://www.tiktok.com/@antonio.eq.constr",
         icon: <TikTokIcon />,
-        description: "Quick clips, tips and the most viral builds we've done.",
+        description: "Short videos and construction updates.",
         color: "from-purple-500/20 to-amber-500/10"
     }
 ];
@@ -74,7 +81,7 @@ function TikTokIcon() {
 
 export default function MediaPage() {
     return (
-        <div className="flex flex-col">
+        <div className="page-route page-media flex flex-col">
 
             {/* hero */}
             <section className="relative px-6 py-24 md:py-32 overflow-hidden">
@@ -85,20 +92,20 @@ export default function MediaPage() {
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-500/40 bg-amber-500/10 w-fit">
                             <Sparkles size={12} className="text-amber-400" />
                             <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-400">
-                                Follow Our Work
+                                Find us online
                             </span>
                         </div>
 
                         <h1 className="text-6xl md:text-[120px] font-black tracking-tighter leading-[0.8] uppercase text-white">
-                            SOCIAL <br />
+                            Construction <br />
                             <span className="text-zinc-300 transition-colors hover:text-white cursor-default">
-                                MEDIA
+                                updates
                             </span>
                             <span className="text-amber-500">.</span>
                         </h1>
 
                         <p className="max-w-xl text-zinc-200 text-base md:text-lg font-light leading-relaxed pl-4 border-l-2 border-amber-500/40">
-                            Stay connected with Antonio Enriquez Construction. Follow us across all platforms for daily updates, project tours and inspiration.
+                            Follow Antonio Enriquez Construction for project photos, videos, and company updates.
                         </p>
                     </div>
                 </div>
@@ -156,7 +163,7 @@ export default function MediaPage() {
 
                 <div className="relative z-10 mx-auto max-w-4xl text-center">
                     <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.85] mb-10 text-white">
-                        Got a project? <br />
+                        Have a project? <br />
                         <span className="text-zinc-300">Let&apos;s talk.</span>
                     </h2>
 

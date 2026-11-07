@@ -1,9 +1,17 @@
 import Link from "next/link";
-import { Code, Globe, Cpu, ShieldCheck, Zap, ArrowUpRight, Mail, Hammer, Sparkles } from "lucide-react";
+import Image from "next/image";
+import { Ruler, MessageSquare, HardHat, ShieldCheck, Zap, ArrowUpRight, Mail, Hammer, Sparkles } from "lucide-react";
+import { socialMetadata } from "../social-metadata";
+
+export const metadata = socialMetadata(
+  "/about",
+  "Built with care, from the ground up",
+  "Get to know Antonio Enriquez Construction, a family-run general contractor founded in Perris in 2016 and built on clear communication and careful work."
+);
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col">
+    <div className="page-route page-about flex flex-col">
 
       {/* hero */}
       <section className="relative px-6 py-24 md:py-32 overflow-hidden">
@@ -14,20 +22,20 @@ export default function AboutPage() {
             <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-amber-500/40 bg-amber-500/10 w-fit">
               <Sparkles size={12} className="text-amber-400" />
               <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-400">
-                The Vision
+                About the company
               </span>
             </div>
 
             <h1 className="text-6xl md:text-[120px] font-black tracking-tighter leading-[0.8] uppercase text-white">
-              LEGACY <br />
+              Built with care <br />
               <span className="text-zinc-300 transition-colors hover:text-white cursor-default">
-                MEETS DIGITAL
+                from the ground up
               </span>
               <span className="text-amber-500">.</span>
             </h1>
 
             <p className="max-w-xl text-zinc-300 text-base md:text-lg font-light leading-relaxed pl-4 border-l-2 border-amber-500/40">
-              Two crafts, one mission — building real things that last and digital experiences that work.
+              Antonio Enriquez Construction is a Perris-based general contractor working on residential and commercial construction, remodeling, and finish projects.
             </p>
           </div>
         </div>
@@ -43,9 +51,12 @@ export default function AboutPage() {
               <div className="absolute -inset-4 bg-amber-500/10 blur-3xl rounded-[3rem] opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
 
               <div className="relative aspect-square bg-zinc-900 border border-white/15 rounded-[2.5rem] overflow-hidden shadow-2xl">
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                  style={{ backgroundImage: "url(/joseEnriquez.jpg)" }}
+                <Image
+                  src="/joseEnriquez.jpg"
+                  alt="Jose Antonio Enriquez, founder of Antonio Enriquez Construction"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent" />
 
@@ -53,7 +64,7 @@ export default function AboutPage() {
                 <div className="absolute top-6 right-6 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20">
                   <Hammer size={11} className="text-amber-400" />
                   <span className="text-[9px] font-black uppercase tracking-[0.3em] text-white">
-                    Since 2016
+                    Established 2016
                   </span>
                 </div>
 
@@ -62,7 +73,7 @@ export default function AboutPage() {
                     Jose Antonio Enriquez
                   </p>
                   <p className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-white leading-none">
-                    Founder &amp; <br /> Master Builder
+                    Founder &amp; <br /> General Contractor
                   </p>
                 </div>
               </div>
@@ -75,32 +86,32 @@ export default function AboutPage() {
                   <span className="text-amber-400 font-black text-sm">01</span>
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold tracking-tighter uppercase text-white">
-                  The Foundation
+                  The company
                 </h2>
               </div>
 
               <div className="relative pl-6 border-l-2 border-amber-500/40">
                 <p className="text-zinc-200 text-lg md:text-xl font-light leading-relaxed italic">
-                  &quot;Construction isn&apos;t just about wood and concrete — it&apos;s about the trust built between people.&quot;
+                  A clear conversation is the start of a well-run project.
                 </p>
               </div>
 
               <p className="text-zinc-300 leading-relaxed">
-                Founded by Jose Antonio Enriquez, a proud builder with Mexican roots, Antonio Enriquez Construction has led projects with a tireless work ethic since 2016. He combines the rich craftsmanship tradition of his heritage with California&apos;s highest technical standards — focusing on surgical precision and transparent communication on every job.
+                Founded by Jose Antonio Enriquez in 2016, the company works across construction, remodeling, metal work, concrete, painting, and related trades. Each project begins with the customer&apos;s goals and a clear understanding of the work ahead.
               </p>
 
               {/* stats */}
               <div className="grid grid-cols-2 gap-3 pt-4">
                 <div className="p-6 rounded-3xl border border-white/10 bg-white/5 hover:border-amber-500/40 hover:bg-amber-500/5 transition-all duration-500">
-                  <p className="text-3xl font-black italic text-white mb-2">10+</p>
+                  <p className="text-3xl font-black italic text-white mb-2">2016</p>
                   <p className="text-[9px] uppercase tracking-[0.3em] text-zinc-300 font-bold">
-                    Years of Experience
+                    Founded in Perris
                   </p>
                 </div>
                 <div className="p-6 rounded-3xl border border-white/10 bg-white/5 hover:border-amber-500/40 hover:bg-amber-500/5 transition-all duration-500">
-                  <p className="text-3xl font-black italic text-white mb-2">MX</p>
+                  <p className="text-3xl font-black italic text-white mb-2">CA</p>
                   <p className="text-[9px] uppercase tracking-[0.3em] text-zinc-300 font-bold">
-                    Heritage &amp; Pride
+                    Based in California
                   </p>
                 </div>
               </div>
@@ -122,32 +133,32 @@ export default function AboutPage() {
                   <span className="text-amber-400 font-black text-sm">02</span>
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold tracking-tighter uppercase text-white">
-                  Digital Architecture
+                  A hands-on process
                 </h2>
               </div>
 
               <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight">
-                Engineered by{" "}
+                Clear communication at{" "}
                 <span className="text-amber-400 transition-colors hover:text-amber-300">
-                  Jonatan
+                  every stage
                 </span>
                 <br />
                 <span className="text-zinc-300 text-xl md:text-2xl font-light">
-                  Founder of Vextrix Studio.
+                  From the first conversation to the final walkthrough.
                 </span>
               </h3>
 
               <p className="text-zinc-300 leading-relaxed">
-                Vextrix Studio helps local businesses establish a professional online presence through modern websites and high-performance digital solutions — built clean, fast, and made to last.
+                We take time to understand the scope, talk through practical options, and keep the next steps clear as the work moves forward.
               </p>
 
               <a
-                href="mailto:vextrixstudio@outlook.com"
+                href="/estimate"
                 className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/15 bg-white/5 text-zinc-200 hover:bg-amber-500 hover:border-amber-500 hover:text-black transition-all duration-300 group"
               >
                 <Mail size={16} />
                 <span className="text-[10px] font-bold uppercase tracking-[0.3em]">
-                  Contact Studio
+                  Discuss a project
                 </span>
                 <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
@@ -156,10 +167,10 @@ export default function AboutPage() {
             {/* cards material */}
             <div className="lg:col-span-7 grid sm:grid-cols-2 gap-3">
               {[
-                { title: "Modern Design", icon: <Globe size={20} />, d: "Clean, responsive interfaces built for any device." },
-                { title: "Credibility", icon: <ShieldCheck size={20} />, d: "Helping local businesses earn trust and grow." },
-                { title: "Clean Code", icon: <Code size={20} />, d: "Built with React, TypeScript and Tailwind CSS." },
-                { title: "Fast Loading", icon: <Zap size={20} />, d: "Performance-first optimization for real speed." }
+                { title: "Planning", icon: <Ruler size={20} />, d: "Talk through the project scope, priorities, and site conditions." },
+                { title: "Communication", icon: <MessageSquare size={20} />, d: "Keep decisions, questions, and next steps easy to follow." },
+                { title: "Craft", icon: <Hammer size={20} />, d: "Coordinate construction and finish work with care." },
+                { title: "Follow-through", icon: <Zap size={20} />, d: "Review the work together before the project wraps up." }
               ].map((item, i) => (
                 <div
                   key={i}
@@ -190,19 +201,19 @@ export default function AboutPage() {
       <section className="py-32 px-6">
         <div className="mx-auto max-w-4xl text-center">
           <div className="inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-amber-500/15 border border-amber-500/30 mb-10">
-            <Cpu className="text-amber-400" size={28} />
+            <HardHat className="text-amber-400" size={28} />
           </div>
 
           <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-12 text-white">
-            Providing professional <br />
+            Good work begins <br />
             <span className="text-zinc-300 transition-colors hover:text-white cursor-default">
-              solutions for local
+              with a conversation
             </span>{" "}
-            entrepreneurs.
+            about your space.
           </h2>
 
           <div className="flex flex-wrap justify-center gap-3">
-            {["Responsive", "Modern", "Credible", "Efficient"].map((word, i) => (
+            {["Plan", "Build", "Review", "Complete"].map((word, i) => (
               <span
                 key={i}
                 className="px-5 py-2.5 rounded-full border border-white/15 bg-white/5 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-200 hover:bg-amber-500 hover:border-amber-500 hover:text-black transition-all duration-300 cursor-default"
@@ -221,9 +232,9 @@ export default function AboutPage() {
 
         <div className="relative z-10 mx-auto max-w-5xl text-center">
           <h2 className="text-5xl md:text-[100px] font-black uppercase tracking-tighter leading-[0.85] mb-12 text-white">
-            Build your <br />
+            Have a project <br />
             <span className="text-zinc-300 transition-colors hover:text-white cursor-default">
-              legacy today.
+              in mind?
             </span>
           </h2>
 
@@ -232,14 +243,14 @@ export default function AboutPage() {
               href="/estimate"
               className="bg-white text-black px-12 py-6 text-[10px] font-black uppercase tracking-[0.3em] rounded-full transition-all hover:bg-amber-500 hover:scale-105 active:scale-95 shadow-2xl"
             >
-              Get an Estimate
+              Request an estimate
             </Link>
 
             <Link
               href="/contact"
               className="group inline-flex items-center gap-3 px-10 py-6 text-[10px] font-bold uppercase tracking-widest text-zinc-200 hover:text-white border border-white/15 bg-white/5 hover:bg-white/10 rounded-full transition-all"
             >
-              Contact Studio
+              Discuss a project
               <ArrowUpRight
                 size={18}
                 className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"

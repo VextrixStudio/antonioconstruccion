@@ -1,10 +1,17 @@
 // app/privacy/page.tsx
 import Link from "next/link";
 import { Shield, Lock, Eye, Mail, ArrowUpRight, FileText, Sparkles } from "lucide-react";
+import { socialMetadata } from "../social-metadata";
+
+export const metadata = socialMetadata(
+  "/privacy",
+  "Privacy policy",
+  "Read how Antonio Enriquez Construction handles information shared through this website and its estimate request form."
+);
 
 export default function PrivacyPage() {
     return (
-        <div className="flex flex-col">
+        <div className="page-route page-privacy flex flex-col">
 
             {/* hero */}
             <section className="relative px-6 py-24 md:py-32 overflow-hidden">

@@ -1,30 +1,37 @@
 // app/qr/page.tsx
 import { ArrowUpRight, Sparkles, QrCode, Hammer, Share2 } from "lucide-react";
+import { socialMetadata } from "../social-metadata";
+
+export const metadata = socialMetadata(
+  "/qr",
+  "Connect with Antonio Enriquez Construction",
+  "Save Antonio Enriquez Construction’s contact information, explore recent work, or request an estimate for your project."
+);
 
 const OPTIONS = [
     {
         title: "Our Work",
-        subtitle: "See what we've built",
-        description: "Browse our full portfolio of completed projects — kitchens, bathrooms, additions, full remodels and more.",
+        subtitle: "Project photos",
+        description: "Browse photos of residential and commercial construction and remodeling work.",
         url: "/work",
         icon: <Hammer size={28} />,
         color: "from-amber-500/20 to-orange-500/10",
-        cta: "View Portfolio"
+        cta: "View projects"
     },
     {
         title: "Social Media",
-        subtitle: "Follow us everywhere",
-        description: "Daily updates, project tours, behind-the-scenes clips and time-lapse builds across all our platforms.",
+        subtitle: "Follow our updates",
+        description: "Find project photos, videos, and company updates on our social channels.",
         url: "/media",
         icon: <Share2 size={28} />,
         color: "from-purple-500/20 to-amber-500/10",
-        cta: "See Our Socials"
+        cta: "Visit our channels"
     }
 ];
 
 export default function QRPage() {
     return (
-        <div className="flex flex-col">
+        <div className="page-route page-qr flex flex-col">
 
             {/* hero */}
             <section className="relative px-6 py-24 md:py-32 overflow-hidden">
@@ -41,15 +48,15 @@ export default function QRPage() {
                         </div>
 
                         <h1 className="text-5xl md:text-[100px] font-black tracking-tighter leading-[0.8] uppercase text-white">
-                            THANKS FOR <br />
+                            Thanks for <br />
                             <span className="text-zinc-300 transition-colors hover:text-white cursor-default">
-                                SCANNING
+                                stopping by
                             </span>
                             <span className="text-amber-500">.</span>
                         </h1>
 
                         <p className="max-w-xl text-zinc-200 text-base md:text-lg font-light leading-relaxed pl-4 border-l-2 border-amber-500/40">
-                            Welcome to Antonio Enriquez Construction. What would you like to explore?
+                            Browse project photos, learn about our services, or get in touch about your project.
                         </p>
                     </div>
                 </div>
@@ -77,8 +84,8 @@ export default function QRPage() {
                             Choose an option
                         </p>
                         <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white leading-[0.85]">
-                            Want to see what <br />
-                            <span className="text-zinc-300">we can do</span>
+                            Explore our <br />
+                            <span className="text-zinc-300">projects and services</span>
                             <span className="text-amber-500">?</span>
                         </h2>
                     </div>
@@ -134,12 +141,12 @@ export default function QRPage() {
 
                 <div className="relative z-10 mx-auto max-w-4xl text-center">
                     <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.85] mb-6 text-white">
-                        Ready to start <br />
-                        <span className="text-zinc-300">your project?</span>
+                        Planning work <br />
+                        <span className="text-zinc-300">for your property?</span>
                     </h2>
 
                     <p className="text-zinc-400 text-sm md:text-base font-light leading-relaxed max-w-lg mx-auto mb-10">
-                        Get a free estimate today. We&apos;ll walk you through the entire process from start to finish.
+                        Tell us what you are planning. We can discuss the scope and arrange an on-site estimate when needed.
                     </p>
 
                     <div className="flex flex-wrap justify-center gap-4">
@@ -147,7 +154,7 @@ export default function QRPage() {
                             href="/estimate"
                             className="bg-white text-black px-12 py-6 text-[10px] font-black uppercase tracking-[0.3em] rounded-full transition-all hover:bg-amber-500 hover:scale-105 active:scale-95 shadow-2xl inline-flex items-center gap-3"
                         >
-                            Get a Free Estimate
+                            Request an estimate
                             <ArrowUpRight size={14} />
                         </a>
 

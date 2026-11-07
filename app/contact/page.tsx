@@ -1,8 +1,15 @@
 import { Phone, Mail, MapPin, MessageSquare, ArrowUpRight, Sparkles, Clock } from "lucide-react";
+import { socialMetadata } from "../social-metadata";
+
+export const metadata = socialMetadata(
+    "/contact",
+    "Contact Antonio Enriquez Construction",
+    "Call, text, or email Antonio Enriquez Construction in Perris, California to discuss your residential or commercial project."
+);
 
 export default function ContactPage() {
     return (
-        <div className="flex flex-col">
+        <div className="page-route page-contact flex flex-col">
 
             {/* hero */}
             <section className="relative px-6 py-24 md:py-32 overflow-hidden">
@@ -16,20 +23,20 @@ export default function ContactPage() {
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
                             </span>
                             <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-400">
-                                Available Now
+                                Available now
                             </span>
                         </div>
 
                         <h1 className="text-6xl md:text-[120px] font-black tracking-tighter leading-[0.8] uppercase text-white">
-                            LET&apos;S <br />
+                            Let&apos;s <br />
                             <span className="text-zinc-300 transition-colors hover:text-white cursor-default">
-                                START
+                                talk
                             </span>
                             <span className="text-amber-500">.</span>
                         </h1>
 
                         <p className="max-w-xl text-zinc-200 text-base md:text-lg font-light leading-relaxed pl-4 border-l-2 border-amber-500/40">
-                            Reach out anytime — message, call or email. We respond fast and visit on-site for free estimates.
+                            Call, text, or email about your project. We respond quickly and visit on-site for free estimates.
                         </p>
                     </div>
                 </div>
@@ -63,7 +70,7 @@ export default function ContactPage() {
                                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 mb-5">
                                         <Sparkles size={11} className="text-amber-400" />
                                         <span className="text-[9px] font-black uppercase tracking-[0.3em] text-amber-400">
-                                            Fastest Response
+                                            Fastest response
                                         </span>
                                     </div>
                                     <p className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white leading-none">
@@ -99,7 +106,7 @@ export default function ContactPage() {
                                 <div>
                                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/20 bg-white/10 mb-5">
                                         <span className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-200">
-                                            Official Inquiry
+                                            Official inquiry
                                         </span>
                                     </div>
                                     <p className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white leading-none">
@@ -134,7 +141,7 @@ export default function ContactPage() {
                                 <div>
                                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/20 bg-white/10 mb-5">
                                         <span className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-200">
-                                            Official Inquiry
+                                            Official inquiry
                                         </span>
                                     </div>
                                     <p className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white leading-none">
@@ -173,7 +180,7 @@ export default function ContactPage() {
 
                         <div className="lg:col-span-4 border-l-2 border-amber-500/40 pl-6 pb-4">
                             <p className="text-zinc-200 text-base md:text-lg font-light leading-relaxed">
-                                Operating from Perris across Southern California and beyond — bringing premium construction standards to your location.
+                                Based in Perris, the team works across Southern California and beyond. Get in touch to discuss your project location.
                             </p>
                         </div>
                     </div>
@@ -215,11 +222,11 @@ export default function ContactPage() {
                         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-black/30 bg-black/10 w-fit mx-auto md:mx-0">
                             <Clock size={11} className="text-black" />
                             <span className="text-[9px] font-black uppercase tracking-[0.3em] text-black">
-                                This Week
+                                This week
                             </span>
                         </div>
                         <h3 className="text-black text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none">
-                            Need an Estimate?
+                            Need an estimate?
                         </h3>
                         <p className="text-black/70 text-[10px] font-bold uppercase tracking-[0.4em]">
                             Fast site visits available this week
@@ -230,7 +237,7 @@ export default function ContactPage() {
                         href="tel:+13237408161"
                         className="group flex items-center gap-4 bg-black text-white px-12 py-8 rounded-full text-xs font-black uppercase tracking-[0.3em] transition-all hover:scale-105 active:scale-95 hover:shadow-2xl"
                     >
-                        Call Now
+                        Call now
                         <Phone size={16} className="group-hover:rotate-12 transition-transform" />
                     </a>
                 </div>

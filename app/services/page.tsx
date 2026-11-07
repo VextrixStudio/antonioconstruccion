@@ -5,85 +5,92 @@ import {
   Clock, Award, Users, Wrench, Layers, Home as HomeIcon, Store,
   Sparkles
 } from "lucide-react";
+import { socialMetadata } from "../social-metadata";
+
+export const metadata = socialMetadata(
+  "/services",
+  "Construction and remodeling services",
+  "Explore residential and commercial construction, remodeling, painting, metal work, concrete, framing, and tenant improvement services across Perris and Southern California."
+);
 
 const services = [
   {
     title: "General Contracting",
     icon: <HardHat size={28} />,
-    desc: "Complete project oversight from conception to final inspection. Residential and commercial — we manage every detail of the build.",
+    desc: "Project coordination for residential and commercial work, from the first conversation through completion.",
     features: ["Project Management", "Site Supervision", "Subcontractor Coordination"]
   },
   {
     title: "Residential Build",
     icon: <HomeIcon size={28} />,
-    desc: "Crafting luxury custom homes and high-end residential developments with architectural integrity.",
-    features: ["Custom Estates", "Modern ADUs", "Foundation to Roof"]
+    desc: "New home construction and additions shaped around your plans, property, and priorities.",
+    features: ["New Homes", "ADU Construction", "Home Additions"]
   },
   {
     title: "Commercial Spaces",
     icon: <Building2 size={28} />,
-    desc: "Building high-performance environments for retail, office spaces, restaurants and industrial facilities.",
-    features: ["Tenant Improvements", "Retail Build-outs", "Structural Repairs"]
+    desc: "Construction and improvements for commercial spaces, including offices, retail, and restaurants.",
+    features: ["Tenant Improvements", "Retail Build-outs", "Commercial Repairs"]
   },
   {
     title: "Full Remodeling",
     icon: <Hammer size={28} />,
-    desc: "Complete residential and commercial remodels — transforming existing spaces into modern masterpieces.",
+    desc: "Update kitchens, bathrooms, interiors, and commercial spaces with work planned around how they are used.",
     features: ["Kitchen & Bath", "Full Layout Redesign", "Custom Millwork"]
   },
   {
     title: "Interior Design",
     icon: <Ruler size={28} />,
-    desc: "Tailored interior renovations and smart structural redesigns for homes and businesses.",
+    desc: "Interior updates and layout changes for homes and businesses.",
     features: ["Space Planning", "Finish Selection", "Lighting Design"]
   },
   {
     title: "Professional Painting",
     icon: <PaintBucket size={28} />,
-    desc: "Surgical precision in painting and aesthetic coatings for residential and commercial surfaces.",
+    desc: "Interior and exterior painting for residential and commercial properties.",
     features: ["Interior/Exterior", "Cabinet Refinishing", "Industrial Coatings"]
   },
   {
     title: "Concrete Works",
     icon: <Briefcase size={28} />,
-    desc: "Heavy-duty structural work including foundations, driveways, and reinforced concrete systems.",
+    desc: "Concrete work for foundations, driveways, patios, and related site needs.",
     features: ["Foundations", "Reinforced Walls", "Decorative Concrete"]
   },
   {
     title: "Metal Works",
     icon: <Layers size={28} />,
-    desc: "Custom steel framing, railings, gates and structural metal fabrication built to last.",
+    desc: "Custom metal work including steel framing, railings, gates, and fabrication.",
     features: ["Steel Framing", "Railings & Gates", "Custom Fabrication"]
   },
   {
     title: "Repairs & Maintenance",
     icon: <Wrench size={28} />,
-    desc: "Reliable repair services and ongoing maintenance for all residential and commercial properties.",
-    features: ["Emergency Repairs", "Scheduled Service", "Property Upkeep"]
+    desc: "Repairs and ongoing maintenance for residential and commercial properties.",
+    features: ["Repairs", "Scheduled Maintenance", "Property Upkeep"]
   },
   {
     title: "Retail Build-Outs",
     icon: <Store size={28} />,
-    desc: "Turnkey commercial build-outs designed to launch your business fast and on budget.",
-    features: ["Turnkey Solutions", "Brand Integration", "Fast Delivery"]
+    desc: "Interior build-outs for retail and other commercial tenant spaces.",
+    features: ["Interior Build-outs", "Space Updates", "Project Coordination"]
   },
   {
     title: "Drywall & Framing",
     icon: <Ruler size={28} />,
-    desc: "Precision drywall installation, framing and seamless finishing work for any project.",
+    desc: "Framing, drywall installation, and finishing for residential and commercial projects.",
     features: ["Wood & Steel Framing", "Drywall Install", "Finish Texturing"]
   },
   {
     title: "Tenant Improvements",
     icon: <Building2 size={28} />,
-    desc: "Custom upgrades and improvements for commercial tenant spaces of any scale.",
-    features: ["Office Buildouts", "Code Compliance", "Custom Upgrades"]
+    desc: "Improvements to adapt commercial spaces to a tenant’s needs.",
+    features: ["Office Buildouts", "Tenant Updates", "Interior Improvements"]
   }
 ];
 
 export default function ServicesPage() {
   return (
-    <div className="flex flex-col">
+    <div className="page-route page-services flex flex-col">
       
       {/* hero */}
       <section className="relative px-6 py-24 md:py-32 overflow-hidden">
@@ -94,20 +101,19 @@ export default function ServicesPage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-500/40 bg-amber-500/10 w-fit">
               <Sparkles size={12} className="text-amber-400" />
               <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-400">
-                Core Expertise
+                Our services
               </span>
             </div>
 
             <h1 className="text-6xl md:text-[120px] font-black tracking-tighter leading-[0.8] uppercase text-white">
-              OUR <br />
+              Construction and <br />
               <span className="text-zinc-300 transition-colors hover:text-white cursor-default">
-                SERVICES
+                remodeling
               </span>
-              <span className="text-amber-500">.</span>
             </h1>
 
             <p className="max-w-xl text-zinc-200 text-base md:text-lg font-light leading-relaxed pl-4 border-l-2 border-amber-500/40">
-              Comprehensive residential and commercial construction solutions — backed by nearly a decade of technical excellence.
+              Residential and commercial construction, remodeling, painting, concrete, and metal work. Tell us what you are planning and we will talk through the scope.
             </p>
           </div>
         </div>
@@ -168,23 +174,23 @@ export default function ServicesPage() {
           <div className="text-center mb-20 space-y-4">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-500/40 bg-amber-500/10">
               <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-400">
-                The Process
+                How we work
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-tighter italic text-white">
-              The Build Process
+              A clear project process
             </h2>
             <p className="text-zinc-300 uppercase text-[10px] tracking-[0.4em]">
-              Structured for efficiency
+              From the first conversation to the final review
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { t: "Consultation", d: "Understanding vision and budget goals.", icon: <Users size={20} /> },
-              { t: "Planning", d: "Technical blueprints and material selection.", icon: <Ruler size={20} /> },
-              { t: "Execution", d: "High-precision construction with site oversight.", icon: <HardHat size={20} /> },
-              { t: "Delivery", d: "Final inspection and keys in hand.", icon: <Award size={20} /> }
+              { t: "Talk & assess", d: "Discuss your goals, priorities, and site.", icon: <Users size={20} /> },
+              { t: "Plan the scope", d: "Agree on the work and the next steps.", icon: <Ruler size={20} /> },
+              { t: "Complete the work", d: "Carry out the agreed work and share updates.", icon: <HardHat size={20} /> },
+              { t: "Review together", d: "Walk through the finished project.", icon: <Award size={20} /> }
             ].map((step, i) => (
               <div
                 key={i}
@@ -222,8 +228,8 @@ export default function ServicesPage() {
 
             <div className="grid grid-cols-2 gap-3">
               {[
-                { l: "Insured", v: "100%", i: <ShieldCheck size={24} /> },
-                { l: "Reliable", v: "Mon - Sat", i: <Clock size={24} /> }
+                { l: "Licensed & insured", v: "Yes", i: <ShieldCheck size={24} /> },
+                { l: "Established", v: "2016", i: <Clock size={24} /> }
               ].map((item, i) => (
                 <div
                   key={i}
@@ -248,24 +254,24 @@ export default function ServicesPage() {
                   <ShieldCheck className="text-amber-400" size={20} />
                 </div>
                 <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-400">
-                  Trust & Standards
+                  Experience & approach
                 </span>
               </div>
 
               <h2 className="text-4xl md:text-5xl font-bold tracking-tighter uppercase leading-tight text-white">
-                Engineering <br />
-                <span className="text-zinc-300">Peace of Mind.</span>
+                Clear communication <br />
+                <span className="text-zinc-300">throughout the project.</span>
               </h2>
 
               <p className="text-zinc-200 text-lg font-light leading-relaxed pl-4 border-l-2 border-amber-500/40">
-                Since 2016, Antonio Enriquez Construction has prioritized transparency and precision. Every project — residential or commercial — is a testament to our commitment to California&apos;s highest building standards.
+                Since 2016, Antonio Enriquez Construction has worked on residential and commercial projects. We discuss the scope, expected steps, and any site-specific considerations before work begins.
               </p>
 
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/15 bg-white/5 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-200 hover:bg-amber-500 hover:border-amber-500 hover:text-black transition-all duration-300 group"
               >
-                Learn more about our standards
+                Talk with our team
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -280,9 +286,9 @@ export default function ServicesPage() {
 
         <div className="relative z-10 mx-auto max-w-5xl text-center">
           <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-[0.85] mb-12 text-white">
-            Ready to build <br />
+            Have a project <br />
             <span className="text-zinc-300 transition-colors hover:text-white cursor-default">
-              your dream?
+              in mind?
             </span>
           </h2>
 
@@ -291,7 +297,7 @@ export default function ServicesPage() {
               href="/estimate"
               className="bg-white text-black px-12 py-6 text-[10px] font-black uppercase tracking-[0.3em] rounded-full transition-all hover:bg-amber-500 hover:scale-105 active:scale-95 shadow-2xl"
             >
-              Request an Estimate
+              Request an estimate
             </Link>
 
             <Link
